@@ -4,6 +4,10 @@ import heapq
 
 
 def min_stops(D, M, S):
+    # Check if the first gas station is reachable
+    if S[0] > M:
+        return -1
+
     S.append(D)  # Add the destination as the final "gas station"
     num_stops = 0
     current_fuel = M
@@ -17,7 +21,6 @@ def min_stops(D, M, S):
         while current_fuel < distance:
             if not max_heap:
                 return -1  # Destination is not reachable
-
             # Refuel from the largest available fuel station
             current_fuel -= heapq.heappop(max_heap)
             num_stops += 1
